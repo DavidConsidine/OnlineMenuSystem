@@ -74,14 +74,18 @@ void UMenu::OnCreateSession(bool bWasSuccessful)
 {
 	if (bWasSuccessful)
 	{
-		if (GEngine)
+		/*if (GEngine)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Cyan, FString(TEXT("Session created successfully.")));
-		}
+		}*/
 		UWorld* World = GetWorld();
 		if (World)
 		{
 			World->ServerTravel(FString("/Game/ThirdPerson/Maps/Lobby?listen"));
+			/*if (MultiplayerSessionsSubsystem)
+			{
+				MultiplayerSessionsSubsystem->StartSession();
+			}*/
 		}
 	}
 	else
@@ -141,6 +145,13 @@ void UMenu::OnDestroySession(bool bWasSuccessful)
 
 void UMenu::OnStartSession(bool bWasSuccessful)
 {
+	if (bWasSuccessful)
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Orange, FString(TEXT("Started session.")));
+		}
+	}
 }
 
 void UMenu::HostButtonClicked()
